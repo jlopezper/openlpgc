@@ -59,7 +59,7 @@ lpgc_categories <- function(category) {
   id <- extract_metadata(category = cats, func = extract_id)
   name <- extract_metadata(category = cats, func = extract_name)
   notes <- extract_metadata(category = cats, func = extract_notes)
-  created <- extract_metadata(category = cats, func = extract_created)
+  created <- lubridate::as_date(lubridate::ymd_hms(extract_metadata(category = cats, func = extract_created)))
 
   # Create tibble with main info
   df <-
