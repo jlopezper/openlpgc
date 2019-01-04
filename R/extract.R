@@ -6,7 +6,7 @@ extract_generator <- function(feature) {
     }
 
     feature <- x_list[[feature]]
-    if(all(length(feature) != 1, nchar(feature) > 0)) {
+    if(any(length(feature) != 1, nchar(feature) == 0)) {
       feature <- NA
     }
 
