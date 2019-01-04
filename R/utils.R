@@ -39,6 +39,16 @@ api_conn <- function() {
 lpgc_show_categories <- ckanr::group_list(as = "table")
 
 
+#' Dataset available for each category
+#'
+#' @param category Category of interest according to \code{lpgc_show_categories}
+#'
+#' @return A \code{\link[tibble]{tibble}} with author, maintainer, id, name, extra notes and creation date.
+#' @export
+#'
+#' @examples
+#' (df <- lpgc_categories("salud"))
+#' @seealso \code{\link{lpgc_show_categories}}
 lpgc_categories <- function(category) {
   # Check if category is a character vector
   if(!is.character(category)) stop("category must be a character vector")
@@ -71,5 +81,4 @@ lpgc_categories <- function(category) {
          created = created)
 
   df
-
 }
