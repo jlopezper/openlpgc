@@ -5,14 +5,11 @@ extract_generator <- function(feature) {
       return("No available")
     }
 
-
     feature <- x_list[[feature]]
     feature[feature == ""] <- NA
 
     feature
-
   }
-
 }
 
 extract_author <- extract_generator("author")
@@ -22,3 +19,7 @@ extract_name <- extract_generator("name")
 extract_notes <- extract_generator("notes")
 extract_created <- extract_generator("metadata_created")
 
+
+extract_metadata <- function(category, func) {
+  sapply(category, func)
+}

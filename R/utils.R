@@ -41,13 +41,34 @@ lpgc_show_categories <- group_list(as = "table")
 
 lpgc_categories <- function(category) {
   # Check if category is a character vector
-  if(!is.character(category)) stop("category is not a character vector")
+  if(!is.character(category)) stop("category must be a character vector")
+  if(length(category) != 1) stop("category must contain a character vector of length 1")
 
   # Check if any category is not available
   is_cat_available <- category %in% lpgc_show_categories
-  if(any(!is_cat_available)) {
-    stop(paste("Category/ies", category[!is_cat_available] ,"is/are not available. Please check lpgc_show_categories to check the available ones.", sep = " "))
+  if(!is_cat_available) {
+    stop(paste("Category", category[!is_cat_available] ,"is not available. Please check lpgc_show_categories to check the available ones.", sep = " "))
   }
+
+  # Show all packages from this category
+  cats <- ckanr::group_show(category)$packages
+
+  # Get metadata
+  author <- extract_metadata(category = cats, func = extract_author)
+  maintainer <- extract_metadata(category = cats, func = extract_maintainer)
+  id <- extract_metadata(category = cats, func = extract_id)
+  name <- extract_metadata(category = cats, func = extract_name)
+  notes <- extract_metadata(category = cats, func = extract_notes)
+  created <- extract_metadata(category = cats, func = extract_created)
+
+  # Create tibble with main info
+  df <-
+    tibble(author = author,
+         maintainer = maintainer,
+         id = id,
+         name = name,
+         notes = notes,
+         created = created)
 
 
 }
