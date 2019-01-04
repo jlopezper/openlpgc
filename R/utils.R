@@ -36,7 +36,7 @@ api_conn <- function() {
 #'
 #' @examples
 #' openlpgc_categories
-lpgc_show_categories <- group_list(as = "table")
+lpgc_show_categories <- ckanr::group_list(as = "table")
 
 
 lpgc_categories <- function(category) {
@@ -70,5 +70,6 @@ lpgc_categories <- function(category) {
          notes = notes,
          created = created)
 
+  df
 
 }
