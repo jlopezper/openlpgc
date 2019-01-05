@@ -30,9 +30,9 @@ determine_read_generic <- function(id) {
 
   read_generic <-
     switch(fun_read,
-           "CSV" = readr::read_csv,
-           "XLS" = readxl::read_excel,
-           "XLSX" = readxl::read_excel,
+           "CSV" = rio::import,
+           # "XLS" = readxl::read_excel,
+           # "XLSX" = readxl::read_excel,
            function() stop())
   # If cannot find delimiter, return an error that will be called
   # when the function is used. Because this read generic will be called
