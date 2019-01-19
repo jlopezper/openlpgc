@@ -12,7 +12,7 @@ formats_id(id)
 format_read <- function(id) {
   file_format <- formats_id(id)
   # Allowed formats, in preference order
-  allowed_formats <- c("CSV", "XLS", "XLSX")
+  allowed_formats <- c("CSV", "ODS")
 
   if (any(!is.na(match(file_format, allowed_formats)))) {
     file_format <- file_format[order(match(file_format, allowed_formats))][[1]]
@@ -31,13 +31,12 @@ determine_read_generic <- function(id) {
   read_generic <-
     try(switch(fun_read,
            "CSV" = rio::import,
-           # "XLS" = readxl::read_excel,
-           # "XLSX" = readxl::read_excel,
+           "ODS" = rio::import,
            function() stop()), silent = TRUE)
   # If cannot find delimiter, return an error that will be called
   # when the function is used. Because this read generic will be called
   # under try in extract_data, the error will suggest that the data cannot be read
   # and just return the meta data
-  if (is(read_generic, "try-error")) stop("Format no valid") else read_generic
+  if (inherits(read_generic, "try-error")) stop("Format no valid") else read_generic
 }
 
