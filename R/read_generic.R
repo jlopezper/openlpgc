@@ -29,15 +29,15 @@ determine_read_generic <- function(id) {
   fun_read <- format_read(id)
 
   read_generic <-
-    switch(fun_read,
+    try(switch(fun_read,
            "CSV" = rio::import,
            # "XLS" = readxl::read_excel,
            # "XLSX" = readxl::read_excel,
-           function() stop())
+           function() stop()), silent = TRUE)
   # If cannot find delimiter, return an error that will be called
   # when the function is used. Because this read generic will be called
   # under try in extract_data, the error will suggest that the data cannot be read
   # and just return the meta data
-  read_generic
+  if (is(read_generic, "try-error")) stop("Format no valid") else read_generic
 }
 
