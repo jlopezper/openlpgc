@@ -27,7 +27,7 @@ df <- readr::read_csv(x$resources[[1]]$url)
 #'
 #' @return Connection to the LPGC hometown open data website
 api_conn <- function() {
-  ckanr_setup(url = "http://apidatosabiertos.laspalmasgc.es/")
+  ckanr::ckanr_setup(url = "http://apidatosabiertos.laspalmasgc.es/")
 }
 
 #' Categories of open data available on the City Council of Las Palmas de Gran Canaria.
@@ -73,7 +73,7 @@ lpgc_categories <- function(category) {
 
   # Create tibble with main info
   df <-
-    tibble(author = author,
+    tibble::tibble(author = author,
          maintainer = maintainer,
          id = id,
          name = name,
