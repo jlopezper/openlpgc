@@ -57,28 +57,29 @@ lpgc_categories <- function(category) {
   # Check if any category is not available
   is_cat_available <- category %in% lpgc_show_categories
   if(!is_cat_available) {
-    stop(paste("Category", category[!is_cat_available] ,"is not available. Please check lpgc_show_categories to check the available ones.", sep = " "))
+    return(message(paste("Category", category[!is_cat_available] ,"is not available. Please check lpgc_show_categories to check the available ones.", sep = " ")))
   }
 
   # Show all packages from this category
-  cats <- ckanr::group_show(category)$packages
+  results <- ckanr::group_show(category)$packages
 
   # Get metadata
-  author <- extract_metadata(category = cats, func = extract_author)
-  maintainer <- extract_metadata(category = cats, func = extract_maintainer)
-  id <- extract_metadata(category = cats, func = extract_id)
-  name <- extract_metadata(category = cats, func = extract_name)
-  notes <- extract_metadata(category = cats, func = extract_notes)
-  created <- lubridate::as_date(lubridate::ymd_hms(extract_metadata(category = cats, func = extract_created)))
+  final_df <- extract_metadata(packages = results)
+  final_df
+}
 
-  # Create tibble with main info
-  df <-
-    tibble::tibble(author = author,
-         maintainer = maintainer,
-         id = id,
-         name = name,
-         notes = notes,
-         created = created)
 
-  df
+
+lpgc_keywords <- function(keywords) {
+  if(!is.character(keywords)) stop("category must be a character vector")
+  keywords <- ckanr::package_search(keywords)
+  if(keywords$count == 0) {
+    return(message("No datasets available with these keywords"))
+  } else {
+    results <- keywords$results
+  }
+
+  # Get metadata
+  final_df <- extract_metadata(packages = results)
+  final_df
 }
