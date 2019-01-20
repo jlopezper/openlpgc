@@ -29,7 +29,8 @@ extract_all_categories <- function(category, func) {
 }
 
 
-extract_metadata <- function(packages) {
+extract_metadata <- function(id) {
+  packages <- list(ckanr::package_show(id))
   # Get metadata
   author <- extract_all_categories(category = packages, func = extract_author)
   maintainer <- extract_all_categories(category = packages, func = extract_maintainer)
@@ -56,8 +57,8 @@ extract_data <- function(id) {
   # Resources of specified id
   resources <- ckanr::package_show(id)$resources
   # Formats available in that package
-  formats_pkg_available <- extract_all_categories(category = resources,
-                                                  func = extract_format)
+  formats_pkg_available <- toupper(extract_all_categories(category = resources,
+                                                  func = extract_format))
   # Format to read, based on own preference
   format_to_read <- format_read(id)
   # Get index
