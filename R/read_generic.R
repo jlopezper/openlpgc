@@ -37,6 +37,6 @@ determine_read_generic <- function(id) {
   # when the function is used. Because this read generic will be called
   # under try in extract_data, the error will suggest that the data cannot be read
   # and just return the meta data
-  if (inherits(read_generic, "try-error")) stop("Format no valid") else read_generic
+  if (inherits(read_generic, "try-error")) stop("openlpgc can not read the data in the formats available in this dataset") else read_generic
 }
 
