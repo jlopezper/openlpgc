@@ -16,3 +16,4 @@ LazyData: true
 Imports: 
     ckanr,
     tibble
+RoxygenNote: 6.1.1
