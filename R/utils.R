@@ -80,6 +80,9 @@ lpgc_keywords <- function(keywords) {
   }
 
   # Get metadata
-  final_df <- extract_metadata(packages = results)
+  ids <- lapply(results, function (x) x$id)
+  final_df <- dplyr::bind_rows(lapply(ids, function(x) extract_metadata(x)))
+
+  #final_df <- extract_metadata(packages = results)
   final_df
 }
