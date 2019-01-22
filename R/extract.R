@@ -24,20 +24,27 @@ extract_created <- extract_generator("metadata_created")
 extract_format <- extract_generator("format")
 
 
-extract_all_categories <- function(category, func) {
-  sapply(category, func)
+extract_all_categories <- function(package, func) {
+  sapply(package, func)
 }
 
 
+#' Extract metadata from a particular package
+#'
+#' @param id A package ID that can be extracted from the function \code{\link{lpgc_search}}.
+#'
+#' @return A \code{tibble} with the following fields: author, maintainer, id, name, notes and creation date
+#'
+#' @examples \dontrun{df <- extract_metadata(id = "47ea65a4-bc0e-42e1-8bfc-8bd3508642e6")}
 extract_metadata <- function(id) {
   packages <- list(ckanr::package_show(id))
   # Get metadata
-  author <- extract_all_categories(category = packages, func = extract_author)
-  maintainer <- extract_all_categories(category = packages, func = extract_maintainer)
-  id <- extract_all_categories(category = packages, func = extract_id)
-  name <- extract_all_categories(category = packages, func = extract_name)
-  notes <- extract_all_categories(category = packages, func = extract_notes)
-  created <- lubridate::as_date(lubridate::ymd_hms(extract_all_categories(category = packages, func = extract_created)))
+  author <- extract_all_categories(package = packages, func = extract_author)
+  maintainer <- extract_all_categories(package = packages, func = extract_maintainer)
+  id <- extract_all_categories(package = packages, func = extract_id)
+  name <- extract_all_categories(package = packages, func = extract_name)
+  notes <- extract_all_categories(package = packages, func = extract_notes)
+  created <- lubridate::as_date(lubridate::ymd_hms(extract_all_categories(package = packages, func = extract_created)))
 
   # Create tibble with main info
   df <-
@@ -52,12 +59,18 @@ extract_metadata <- function(id) {
 }
 
 
-
+#' Extract metadata from a particular package
+#'
+#' @inheritParams extract_metadata
+#'
+#' @return A \code{tibble} with the data.
+#'
+#' @examples \dontrun{extract_data(id = "47ea65a4-bc0e-42e1-8bfc-8bd3508642e6")}
 extract_data <- function(id) {
   # Resources of specified id
   resources <- ckanr::package_show(id)$resources
   # Formats available in that package
-  formats_pkg_available <- toupper(extract_all_categories(category = resources,
+  formats_pkg_available <- toupper(extract_all_categories(package = resources,
                                                   func = extract_format))
   # Format to read, based on own preference
   format_to_read <- format_read(id)
@@ -83,7 +96,3 @@ extract_data <- function(id) {
   }
   final_df
 }
-
-
-
-
