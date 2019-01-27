@@ -89,28 +89,25 @@ lpgc_search <- function(keywords) {
 
 
 
-check_datasets_read <- function() {
+
+test_quality_datasets <- function(test_type) {
+  # Empty: check proportion of datasets which has no data
+  # Read: check proportion of datasets which cannot be read
+  if(!test_type %in% c("empty", "read")) stop("Only 'empty' and 'read' values allowed")
+
   search_results_id <- sapply(ckanr::package_search(rows = 300)$results, "[[", "id")
 
-  check_if_error <- function(id) {
-    message("Trying to read id: ", id)
-    try_read <- try(lpgc_load(id))
-    ifelse(inherits(try_read, "try-error"), FALSE, TRUE)
-  }
-
-  return(sum(sapply(search_results_id, check_if_error))/length(search_results_id))
-}
-
-
-
-check_datasets_empty <- function() {
-  search_results_id <- sapply(ckanr::package_search(rows = 300)$results, "[[", "id")
-
-  check_if_empty <- sapply(search_results_id, function(x) {
+  check_if <- sapply(search_results_id, function(x) {
     message("Trying to read id: ", x)
-    df <- lpgc_load(id = x)
-    ifelse(length(df$data) == 0, FALSE, TRUE)
+    if(test_type == "empty") {
+      try_read <- try(lpgc_load(x))
+      ifelse(inherits(try_read, "try-error"), FALSE, TRUE)
+    } else {
+      df <- lpgc_load(id = x)
+      ifelse(length(df$data) == 0, FALSE, TRUE)
+    }
   })
 
-  return(sum(check_if_empty)/length(search_results_id))
+  return(sum(check_if)/length(search_results_id))
 }
+
