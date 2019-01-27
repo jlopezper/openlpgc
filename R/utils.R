@@ -39,15 +39,14 @@ api_conn <- function() {
 lpgc_show_categories <- ckanr::group_list(as = "table")
 
 
-#' Dataset available for each category
+#' Datasets available for each category
 #'
 #' @param category Category of interest according to \code{lpgc_show_categories}
 #'
 #' @return A \code{\link[tibble]{tibble}} with author, maintainer, id, name, extra notes and creation date.
 #' @export
 #'
-#' @examples
-#' (df <- lpgc_categories("salud"))
+#' @examples \dontrun{df <- lpgc_categories("salud")}
 #' @seealso \code{\link{lpgc_show_categories}}
 lpgc_categories <- function(category) {
   # Check if category is a character vector
@@ -70,6 +69,24 @@ lpgc_categories <- function(category) {
 
 
 
+#' Search datasets by keyword in the open data site of the city of Las Palmas de Gran Canaria
+#'
+#' @param keywords Words that describe the data that is intended to be found (in Spanish). Spaces may be included and there is no distinction between uppercase or lowercase.
+#'
+#' @return A \code{\link[tibble]{tibble}} with:
+#' \itemize{
+#'  \item Author
+#'  \item Maintainer
+#'  \item ID
+#'  \item Name
+#'  \item Notes
+#'  \item Creation date
+#'  }
+#'
+#' @export
+#'
+#' @examples \dontrun{lpgc_search(keywords = "medio ambiente")}
+#' @seealso \code{\link{lpgc_load}}
 lpgc_search <- function(keywords) {
   if(!is.character(keywords)) stop("category must be a character vector")
   keywords <- ckanr::package_search(keywords)
@@ -90,6 +107,11 @@ lpgc_search <- function(keywords) {
 
 
 
+#' Function to test if datasets have the proper quality
+#'
+#' @param test_type Should be 'empty' for testing if data slot is empty and 'read' for testing if each dataset can be read.
+#'
+#' @return Proportion of datasets passing the specified test
 test_quality_datasets <- function(test_type) {
   # Empty: check proportion of datasets which has no data
   # Read: check proportion of datasets which cannot be read

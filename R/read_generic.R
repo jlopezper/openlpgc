@@ -1,5 +1,3 @@
-id = "dfec7f1a-d522-4fa9-8712-4aa308eeeab6"
-
 formats_id <- function(id) {
   pck_resources <- ckanr::package_show(id)$resources
   formats <- toupper(sapply(pck_resources, function(x) x[["format"]]))

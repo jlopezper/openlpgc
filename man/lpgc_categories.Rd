@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{lpgc_categories}
 \alias{lpgc_categories}
-\title{Dataset available for each category}
+\title{Datasets available for each category}
 \usage{
 lpgc_categories(category)
 }
@@ -13,10 +13,10 @@ lpgc_categories(category)
 A \code{\link[tibble]{tibble}} with author, maintainer, id, name, extra notes and creation date.
 }
 \description{
-Dataset available for each category
+Datasets available for each category
 }
 \examples{
-(df <- lpgc_categories("salud"))
+\dontrun{df <- lpgc_categories("salud")}
 }
 \seealso{
 \code{\link{lpgc_show_categories}}
