@@ -4,7 +4,7 @@ lpgc_load <- function(id) {
     structure(
       list(
         metadata = tryCatch(expr = extract_metadata(id),
-                            error = function(e) message("***** id not found *****")),
+                            error = function(e) message("** id not found **")),
         data = tryCatch(expr = extract_data(id),
                         error = function(e) NULL)
       )

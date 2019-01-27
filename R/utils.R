@@ -86,3 +86,31 @@ lpgc_search <- function(keywords) {
   #final_df <- extract_metadata(packages = results)
   final_df
 }
+
+
+
+check_datasets_read <- function() {
+  search_results_id <- sapply(ckanr::package_search(rows = 300)$results, "[[", "id")
+
+  check_if_error <- function(id) {
+    message("Trying to read id: ", id)
+    try_read <- try(lpgc_load(id))
+    ifelse(inherits(try_read, "try-error"), FALSE, TRUE)
+  }
+
+  return(sum(sapply(search_results_id, check_if_error))/length(search_results_id))
+}
+
+
+
+check_datasets_empty <- function() {
+  search_results_id <- sapply(ckanr::package_search(rows = 300)$results, "[[", "id")
+
+  check_if_empty <- sapply(search_results_id, function(x) {
+    message("Trying to read id: ", x)
+    df <- lpgc_load(id = x)
+    ifelse(length(df$data) == 0, FALSE, TRUE)
+  })
+
+  return(sum(check_if_empty)/length(search_results_id))
+}
