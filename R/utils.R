@@ -70,7 +70,7 @@ lpgc_categories <- function(category) {
 
 
 
-lpgc_keywords <- function(keywords) {
+lpgc_search <- function(keywords) {
   if(!is.character(keywords)) stop("category must be a character vector")
   keywords <- ckanr::package_search(keywords)
   if(keywords$count == 0) {
