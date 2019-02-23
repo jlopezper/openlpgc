@@ -4,7 +4,6 @@ formats_id <- function(id) {
   formats
 }
 
-formats_id(id)
 
 
 format_read <- function(id) {
