@@ -4,7 +4,7 @@
 #'
 #' @examples
 #' lpgc_show_categories
-lpgc_show_categories <- ckanr::group_list(as = "table")
+lpgc_show_categories <- ckanr::group_list(as = "table", url = "http://apidatosabiertos.laspalmasgc.es/")
 
 
 #' Datasets available for each category
