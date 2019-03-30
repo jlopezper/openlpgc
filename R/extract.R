@@ -1,3 +1,8 @@
+#' Master function to extract features
+#'
+#' @param feature Feature of interest
+#'
+#' @return Function of interest
 extract_generator <- function(feature) {
   force(feature)
   function(x_list) {
