@@ -18,7 +18,7 @@
 #' @seealso \code{\link{lpgc_load}}
 lpgc_search <- function(keywords) {
   if(any(!is.character(keywords), !length(keywords) == 1)) stop("category must be a character vector of length 1")
-  keywords <- ckanr::package_search(keywords)
+  keywords <- ckanr::package_search(keywords, url = "http://apidatosabiertos.laspalmasgc.es/")
   if(keywords$count == 0) {
     return(message("No datasets available with these keywords"))
   } else {

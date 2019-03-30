@@ -37,7 +37,7 @@ remotes::install_github("openlpgc")
 
 Let's show two examples in order to illustrate what it's been stated above.
 
-### Loading data after keyword search
+### Loading data after search by keywords
 
 Let's search all datasets that are related to environment ("medio ambiente", in Spanish). We are supposed to use the `lpgc_search` function for this:
 
@@ -56,5 +56,16 @@ lpgc_load(id = our_id)
 
 `lpgc_load` **always** returns a list with two slots: the first one contains a metadata tibble with information extracted from the site and the second slot is filled with the data, if it was possible to read them.
 
-### Loading data after keyword search
+### Loading data after search by categories
+
+`lpgc_show_categories` displays a character vector with all the current available categories. Once you find the category you want to explore, `lpgc_categories()` shows the datasets related to it. A simple example to better illustrate it:
+
+```{r categories}
+lpgc_show_categories
+lpgc_categories("educacion")
+```
+
+Then we can pass an ID into `lpgc_load` as explained above.
+
+
 

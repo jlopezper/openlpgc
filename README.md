@@ -28,7 +28,7 @@ Example
 
 Let's show two examples in order to illustrate what it's been stated above.
 
-### Loading data after keyword search
+### Loading data after search by keywords
 
 Let's search all datasets that are related to environment ("medio ambiente", in Spanish). We are supposed to use the `lpgc_search` function for this:
 
@@ -74,4 +74,39 @@ lpgc_load(id = our_id)
 
 `lpgc_load` **always** returns a list with two slots: the first one contains a metadata tibble with information extracted from the site and the second slot is filled with the data, if it was possible to read them.
 
-### Loading data after keyword search
+### Loading data after search by categories
+
+`lpgc_show_categories` displays a character vector with all the current available categories. Once you find the category you want to explore, `lpgc_categories()` shows the datasets related to it. A simple example to better illustrate it:
+
+``` r
+lpgc_show_categories
+#>  [1] "ciencia-tecnologia"         "comercio"                  
+#>  [3] "cultura-ocio"               "demografia"                
+#>  [5] "deporte"                    "economia"                  
+#>  [7] "educacion"                  "empleo"                    
+#>  [9] "energia"                    "hacienda"                  
+#> [11] "industria"                  "legislacion-justicia"      
+#> [13] "medio-ambiente"             "medio-rural-pesca"         
+#> [15] "salud"                      "sector-publico"            
+#> [17] "seguridad"                  "sociedad-bienestar"        
+#> [19] "transporte"                 "turismo"                   
+#> [21] "urbanismo-infraestructuras" "vivienda"
+lpgc_categories("educacion")
+#> # A tibble: 12 x 6
+#>    author      maintainer   id         name        notes         created   
+#>    <chr>       <chr>        <chr>      <chr>       <chr>         <date>    
+#>  1 Ayuntamien… Sección de … c5888937-… escuela-mu… Escuela Muni… 2014-08-05
+#>  2 <NA>        <NA>         a0aca961-… escuelas-m… Número de us… 2018-01-12
+#>  3 Ayuntamien… Sección de … 48270b9f-… escuelas-m… Número de us… 2014-08-05
+#>  4 <NA>        <NA>         354f9cab-… talleres-e… Talleres dir… 2018-01-10
+#>  5 <NA>        <NA>         7d97a59b-… talleres-e… Talleres dir… 2018-01-10
+#>  6 <NA>        <NA>         975cf9b2-… servicio-a… Servicio dir… 2018-01-10
+#>  7 <NA>        <NA>         568c0ddc-… servicio-a… Servicio dir… 2018-01-10
+#>  8 <NA>        <NA>         8424463a-… actividade… Actividades … 2018-01-09
+#>  9 <NA>        <NA>         147f6a19-… talleres-a… Talleres del… 2018-01-09
+#> 10 <NA>        <NA>         e21904d3-… actividade… Actividades … 2018-01-08
+#> 11 <NA>        <NA>         1bf264fb-… talleres-a… Talleres de … 2018-01-08
+#> 12 Ayuntamien… Sección de … 83a3320c-… centros-es… Nivel, nombr… 2014-08-05
+```
+
+Then we can pass an ID into `lpgc_load` as explained above.
