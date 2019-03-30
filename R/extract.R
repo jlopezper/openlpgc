@@ -42,7 +42,7 @@ extract_all_categories <- function(package, func) {
 #'
 #' @examples \dontrun{df <- extract_metadata(id = "47ea65a4-bc0e-42e1-8bfc-8bd3508642e6")}
 extract_metadata <- function(id) {
-  packages <- list(ckanr::package_show(id))
+  packages <- list(ckanr::package_show(id, url = "http://apidatosabiertos.laspalmasgc.es/"))
   # Get metadata
   author <- extract_all_categories(package = packages, func = extract_author)
   maintainer <- extract_all_categories(package = packages, func = extract_maintainer)
@@ -73,7 +73,7 @@ extract_metadata <- function(id) {
 #' @examples \dontrun{extract_data(id = "47ea65a4-bc0e-42e1-8bfc-8bd3508642e6")}
 extract_data <- function(id) {
   # Resources of specified id
-  resources <- ckanr::package_show(id)$resources
+  resources <- ckanr::package_show(id, url = "http://apidatosabiertos.laspalmasgc.es/")$resources
   # Formats available in that package
   formats_pkg_available <- toupper(extract_all_categories(package = resources,
                                                   func = extract_format))

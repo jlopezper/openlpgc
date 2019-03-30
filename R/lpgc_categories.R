@@ -28,7 +28,7 @@ lpgc_categories <- function(category) {
   }
 
   # Show all packages from this category
-  results <- ckanr::group_show(category)$packages
+  results <- ckanr::group_show(category, url = "http://apidatosabiertos.laspalmasgc.es/")$packages
 
   # Get metadata
   ids <- lapply(results, function (x) x$id)
