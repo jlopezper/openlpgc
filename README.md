@@ -3,6 +3,8 @@
 openlpgc
 ========
 
+[![Travis build status](https://travis-ci.org/jlopezper/openlpgc.svg?branch=master)](https://travis-ci.org/jlopezper/openlpgc)
+
 The goal of openlpgc is to provide an R interface in order to extract data from Las Palmas de Gran Canaria City Council [open data site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the [ckanr](https://github.com/ropensci/ckanr) package.
 
 This package is fully inspirated by the [`opendataes`](https://github.com/rOpenSpain/opendataes) package.
