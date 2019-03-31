@@ -7,8 +7,8 @@
 status](https://travis-ci.org/jlopezper/openlpgc.svg?branch=master)](https://travis-ci.org/jlopezper/openlpgc)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-The goal of openlpgc is to provide an R interface in order to extract
-data from Las Palmas de Gran Canaria City Council [open data
+The goal of openlpgc is to provide an R interface for extracting data
+from Las Palmas de Gran Canaria City Council [open data
 site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN
 API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the
 [ckanr](https://github.com/ropensci/ckanr) package.
@@ -18,7 +18,8 @@ This package is fully inspirated by the
 
 ## Installation
 
-You can install the released version of `openlpgc` from Github with:
+You can install the latest released version of `openlpgc` from Github
+with:
 
 ``` r
 # install.packages("remotes")
@@ -84,7 +85,7 @@ lpgc_load(id = our_id)
 ```
 
 `lpgc_load` **always** returns a list with two slots: the first one
-contains a metadata tibble with information extracted from the site and
+contains metadata tibble with information extracted from the site and
 the second slot is filled with the data, if it was possible to read
 them.
 
@@ -126,4 +127,4 @@ lpgc_categories("educacion")
 #> 12 Ayuntamien… Sección de … 83a3320c-… centros-es… Nivel, nombr… 2014-08-05
 ```
 
-Then we can pass an ID into `lpgc_load` as explained above.
+Then we can pass an ID into `lpgc_load` as explained before

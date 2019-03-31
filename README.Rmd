@@ -18,13 +18,13 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 
-The goal of openlpgc is to provide an R interface in order to extract data from Las Palmas de Gran Canaria City Council [open data site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the [ckanr](https://github.com/ropensci/ckanr) package.
+The goal of openlpgc is to provide an R interface for extracting data from Las Palmas de Gran Canaria City Council [open data site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the [ckanr](https://github.com/ropensci/ckanr) package.
 
 This package is fully inspirated by the [`opendataes`](https://github.com/rOpenSpain/opendataes) package. 
 
 ## Installation
 
-You can install the released version of `openlpgc` from Github with:
+You can install the latest released version of `openlpgc` from Github with:
 
 ``` r
 # install.packages("remotes")
@@ -58,7 +58,7 @@ lpgc_load(id = our_id)
 ```
 
 
-`lpgc_load` **always** returns a list with two slots: the first one contains a metadata tibble with information extracted from the site and the second slot is filled with the data, if it was possible to read them.
+`lpgc_load` **always** returns a list with two slots: the first one contains metadata tibble with information extracted from the site and the second slot is filled with the data, if it was possible to read them.
 
 ### Loading data after search by categories
 
@@ -69,7 +69,7 @@ lpgc_show_categories
 lpgc_categories("educacion")
 ```
 
-Then we can pass an ID into `lpgc_load` as explained above.
+Then we can pass an ID into `lpgc_load` as explained before
 
 
 
