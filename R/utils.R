@@ -11,7 +11,8 @@ test_quality_datasets <- function(test_type) {
   # Read: check proportion of datasets which cannot be read
   if(!test_type %in% c("empty", "read")) stop("Only 'empty' and 'read' values allowed")
 
-  search_results_id <- sapply(ckanr::package_search(rows = 300)$results, "[[", "id")
+  search_results_id <- sapply(ckanr::package_search(rows = 300,
+                                                    url = "http://apidatosabiertos.laspalmasgc.es/")$results, "[[", "id")
 
   check_if <- sapply(search_results_id, function(x) {
     message("Trying to read id: ", x)

@@ -11,8 +11,8 @@ test_that("There are some packages within several categories", {
 
   category <- "vivienda"
 
-  expect_gt(length(ckanr::group_show(category)$packages), 0)
-  expect_is(ckanr::group_show(category)$packages, "list")
+  expect_gt(length(ckanr::group_show(category, url = "http://apidatosabiertos.laspalmasgc.es/")$packages), 0)
+  expect_is(ckanr::group_show(category, url = "http://apidatosabiertos.laspalmasgc.es/")$packages, "list")
   expect_is(lpgc_categories(category), "tbl_df")
   expect_error(lpgc_categories("ninguna"),
                "Category ninguna is not available. Please check lpgc_show_categories to check the available ones."

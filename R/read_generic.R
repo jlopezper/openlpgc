@@ -1,5 +1,5 @@
 formats_id <- function(id) {
-  pck_resources <- ckanr::package_show(id)$resources
+  pck_resources <- ckanr::package_show(id, url = "http://apidatosabiertos.laspalmasgc.es/")$resources
   formats <- toupper(sapply(pck_resources, function(x) x[["format"]]))
   formats
 }
