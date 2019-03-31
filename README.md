@@ -1,16 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-openlpgc
-========
 
-[![Travis build status](https://travis-ci.org/jlopezper/openlpgc.svg?branch=master)](https://travis-ci.org/jlopezper/openlpgc)
+# openlpgc
 
-The goal of openlpgc is to provide an R interface in order to extract data from Las Palmas de Gran Canaria City Council [open data site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the [ckanr](https://github.com/ropensci/ckanr) package.
+[![Travis build
+status](https://travis-ci.org/jlopezper/openlpgc.svg?branch=master)](https://travis-ci.org/jlopezper/openlpgc)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-This package is fully inspirated by the [`opendataes`](https://github.com/rOpenSpain/opendataes) package.
+The goal of openlpgc is to provide an R interface in order to extract
+data from Las Palmas de Gran Canaria City Council [open data
+site](http://datosabiertos.laspalmasgc.es/). This package uses the [CKAN
+API](https://docs.ckan.org/en/2.8/contents.html) and is powered by the
+[ckanr](https://github.com/ropensci/ckanr) package.
 
-Installation
-------------
+This package is fully inspirated by the
+[`opendataes`](https://github.com/rOpenSpain/opendataes) package.
+
+## Installation
 
 You can install the released version of `openlpgc` from Github with:
 
@@ -19,20 +25,22 @@ You can install the released version of `openlpgc` from Github with:
 remotes::install_github("openlpgc")
 ```
 
-Example
--------
+## Example
 
 `openlpgc` has three main functions:
 
--   `lpgc_categories`: Search for available datasets for each category
--   `lpgc_search`: Search datasets by keyword
--   `lpgc_load`: Load the dataset (specified by its id)
+  - `lpgc_categories`: Search for available datasets for each category
+  - `lpgc_search`: Search datasets by keyword
+  - `lpgc_load`: Load the dataset (specified by its id)
 
-Let's show two examples in order to illustrate what it's been stated above.
+Let’s show two examples in order to illustrate what it’s been stated
+above.
 
 ### Loading data after search by keywords
 
-Let's search all datasets that are related to environment ("medio ambiente", in Spanish). We are supposed to use the `lpgc_search` function for this:
+Let’s search all datasets that are related to environment (“medio
+ambiente”, in Spanish). We are supposed to use the `lpgc_search`
+function for this:
 
 ``` r
 library(openlpgc)
@@ -46,7 +54,8 @@ lpgc_search("medio ambiente")
 #> 4 <NA>        <NA>          704bc902… localizaci… Localización … 2018-01-11
 ```
 
-Once we have the result, we just need to select the ID we want to load and pass it into `lpgc_load`:
+Once we have the result, we just need to select the ID we want to load
+and pass it into `lpgc_load`:
 
 ``` r
 our_id <- lpgc_search("medio ambiente")$id[[1]]
@@ -74,11 +83,17 @@ lpgc_load(id = our_id)
 #> #   HORTELANOS` <int>, `Nº PARCELAS LIBRES` <int>, IMAGEN <chr>
 ```
 
-`lpgc_load` **always** returns a list with two slots: the first one contains a metadata tibble with information extracted from the site and the second slot is filled with the data, if it was possible to read them.
+`lpgc_load` **always** returns a list with two slots: the first one
+contains a metadata tibble with information extracted from the site and
+the second slot is filled with the data, if it was possible to read
+them.
 
 ### Loading data after search by categories
 
-`lpgc_show_categories` displays a character vector with all the current available categories. Once you find the category you want to explore, `lpgc_categories()` shows the datasets related to it. A simple example to better illustrate it:
+`lpgc_show_categories` displays a character vector with all the current
+available categories. Once you find the category you want to explore,
+`lpgc_categories()` shows the datasets related to it. A simple example
+to better illustrate it:
 
 ``` r
 lpgc_show_categories
